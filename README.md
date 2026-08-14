@@ -6,7 +6,7 @@ design patterns used by large production websites.
 ## 📸 Preview
 > Add a screenshot of your clone here.
 
-## 🚀 Live Demo
+## 🚀 Live Demos
 https://your-live-demo-link.com
 
 ## ✨ Features
