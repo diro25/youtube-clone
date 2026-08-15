@@ -1,100 +1,21 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-    <style>
-        body { font-family: sans-serif; background: #f1f0ff; display: flex; justify-content: center; padding: 50px; }
-        .container { width: 500px; }
-        h1 { color: #553c9a; text-align: center; }
-        
-        .stats { display: flex; gap: 10px; margin: 20px 0; }
-        .stat-card { background: white; padding: 15px; border-radius: 8px; flex: 1; text-align: center; border: 1px solid #ddd; }
-        .stat-card span { display: block; font-size: 20px; font-weight: bold; color: #553c9a; }
-
-        .input-group { display: flex; gap: 10px; margin-bottom: 20px; }
-        input { flex: 1; padding: 12px; border: 1px solid #ddd; border-radius: 8px; }
-        .add-btn { background: #6b46c1; color: white; padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; }
-        
-        .task-item { background: white; padding: 15px; margin-bottom: 10px; border-radius: 8px; display: flex; align-items: center; border: 1px solid #ddd; transition: 0.2s; }
-        .task-item.completed { opacity: 0.6; text-decoration: line-through; }
-        .actions { margin-left: auto; display: none; gap: 10px; }
-        .task-item:hover .actions { display: flex; }
-        .edit-btn { color: blue; cursor: pointer; }
-        .delete-btn { color: red; cursor: pointer; }
-    </style>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A focused, local-first to-do list app.">
+  <title>FocusFlow | To-Do List</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-<div class="container">
-    <h1>To-Do List</h1>
-    <div class="input-group">
-        <input type="text" id="taskInput" placeholder="Add a new task...">
-        <button class="add-btn" onclick="addTask()">+ Add</button>
-    </div>
-    
-    <div class="stats">
-        <div class="stat-card">Active <span id="activeCount">0</span></div>
-        <div class="stat-card">Completed <span id="completedCount">0</span></div>
-        <div class="stat-card">Total <span id="totalCount">0</span></div>
-    </div>
-
-    <div id="taskLists"""></div>
-</div>
-
-<script>
-    const defaultTasks = ["Welcome to your to-do list!", "Click the checkbox to mark as complete", "Hover to delete items"];
-
-    function createNewTaskElement(text) {
-        let div = document.createElement("div");
-        div.className = "task-item";
-        div.innerHTML = `
-            <input type="checkbox" onchange="toggleTask(this)">
-            <span class="text-span" style="flex:1; margin-left: 10px;">${text}</span>
-            <div class="actions">
-                <span class="edit-btn" onclick="editTask(this)">✎</span>
-                <span class="delete-btn" onclick="removeTask(this)">🗑</span>
-            </div>
-        `;
-        return div;
-    }
-
-    // Load defaults on start
-    defaultTasks.forEach(task => {
-        document.getElementById("taskList").appendChild(createNewTaskElement(task));
-    });
-    updateStats();
-
-    function addTask() {
-        let input = document.getElementById("taskInput");
-        if (!input.value) return;
-        document.getElementById("taskList").appendChild(createNewTaskElement(input.value));
-        input.value = "";
-        updateStats();
-    }
-
-    function toggleTask(checkbox) {
-        checkbox.parentElement.classList.toggle("completed");
-        updateStats();
-    }
-
-    function editTask(btn) {
-        let textSpan = btn.parentElement.parentElement.querySelector(".text-span");
-        let newText = prompt("Edit task:", textSpan.innerText);
-        if (newText) textSpan.innerText = newText;
-    }
-
-    function removeTask(btn) {
-        btn.parentElement.parentElement.remove();
-        updateStats();
-    }
-
-    function updateStats() {
-        let tasks = document.getElementsByClassName("task-item");
-        let completed = document.getElementsByClassName("completed");
-        document.getElementById("totalCount").innerText = tasks.length;
-        document.getElementById("completedCount").innerText = completed.length;
-        document.getElementById("activeCount").innerText = tasks.length - completed.length;
-    }
-</script>
-
+  <main class="app-shell">
+    <header class="hero"><div><p class="eyebrow">YOUR DAILY PLANNER</p><h1>Make room for <em>what matters.</em></h1><p class="hero-copy">A calm place to capture tasks, organise your day, and celebrate real progress.</p></div><div class="date-card" aria-label="Today"><span id="todayDay">MON</span><strong id="todayDate">01</strong><span id="todayMonth">JAN</span></div></header>
+    <section class="panel task-creator" aria-labelledby="new-task-heading"><div class="section-heading"><p class="eyebrow">QUICK CAPTURE</p><h2 id="new-task-heading">What needs your attention?</h2></div><form id="taskForm"><label class="sr-only" for="taskInput">Task title</label><div class="title-row"><input id="taskInput" type="text" maxlength="120" placeholder="e.g. Send the project update" autocomplete="off" required><button class="primary-button" type="submit"><span aria-hidden="true">+</span> Add task</button></div><div class="task-options"><label>Category<select id="categoryInput"><option>Personal</option><option>Work</option><option>Study</option><option>Health</option></select></label><label>Priority<select id="priorityInput"><option value="medium">Medium</option><option value="high">High</option><option value="low">Low</option></select></label><label>Due date<input id="dueDateInput" type="date"></label></div></form></section>
+    <section class="stats" aria-label="Task statistics"><article class="stat-card"><span class="stat-icon amber">◌</span><div><strong id="activeCount">0</strong><span>Active tasks</span></div></article><article class="stat-card"><span class="stat-icon green">✓</span><div><strong id="completedCount">0</strong><span>Completed</span></div></article><article class="stat-card"><span class="stat-icon purple">◒</span><div><strong id="totalCount">0</strong><span>Total tasks</span></div></article></section>
+    <section class="panel task-board" aria-labelledby="tasks-heading"><div class="board-header"><div><p class="eyebrow">YOUR LIST</p><h2 id="tasks-heading">Today’s tasks</h2></div><button id="clearCompleted" class="text-button" type="button">Clear completed</button></div><div class="controls"><label class="search-field"><span aria-hidden="true">⌕</span><span class="sr-only">Search tasks</span><input id="searchInput" type="search" placeholder="Search tasks"></label><label class="sr-only" for="statusFilter">Status</label><select id="statusFilter"><option value="all">All tasks</option><option value="active">Active</option><option value="completed">Completed</option></select><label class="sr-only" for="categoryFilter">Category</label><select id="categoryFilter"><option value="all">All categories</option><option>Personal</option><option>Work</option><option>Study</option><option>Health</option></select><label class="sr-only" for="sortSelect">Sort tasks</label><select id="sortSelect"><option value="newest">Newest first</option><option value="due">Due date</option><option value="priority">Priority</option></select></div><ul id="taskList" class="task-list" aria-live="polite"></ul><div id="emptyState" class="empty-state" hidden><span>✦</span><h3>Nothing here yet</h3><p>Add a task above to make a little progress today.</p></div></section>
+  </main>
+  <template id="taskTemplate"><li class="task-item"><label class="check-wrap"><input class="task-toggle" type="checkbox"><span aria-hidden="true"></span><span class="sr-only">Mark task as complete</span></label><div class="task-content"><div class="task-title-row"><p class="task-title"></p><span class="priority-badge"></span></div><div class="task-meta"><span class="category-badge"></span><span class="due-date"></span></div></div><div class="task-actions"><button class="icon-button edit-button" type="button" aria-label="Edit task">✎</button><button class="icon-button delete-button" type="button" aria-label="Delete task">×</button></div></li></template>
+  <script src="script.js"></script>
 </body>
 </html>

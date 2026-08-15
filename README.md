@@ -7,17 +7,18 @@
 [![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?logo=javascript&logoColor=black)](https://developer.mozilla.org/docs/Web/JavaScript)
 [![License](https://img.shields.io/badge/License-Not%20specified-lightgrey)](#license)
 
-## ✨ Intended experience
+## ✨ Features
 
-Keep everyday work visible and simple. The interface is designed to start with a few example tasks and offer a focused way to add, complete, edit, and remove tasks.
+Keep everyday work visible and simple. FocusFlow starts with a few example tasks and gives you a calm, responsive place to plan your day.
 
-| Feature           | Description                                                 |
-| ----------------- | ----------------------------------------------------------- |
-| ➕ Add tasks      | Type a task and select **+ Add** to place it in your list.  |
-| ☑️ Complete tasks | Use the checkbox to mark an item as finished.               |
-| ✏️ Edit tasks     | Hover a task and select the pencil icon to change its text. |
-| 🗑️ Delete tasks   | Hover a task and select the bin icon to remove it.          |
-| 📊 Live stats     | See active, completed, and total task counts at a glance.   |
+| Feature              | Description                                                                     |
+| -------------------- | ------------------------------------------------------------------------------- |
+| ➕ Task management   | Add, complete, edit, and delete tasks with immediate feedback.                  |
+| 🏷️ Organisation      | Assign a category, priority, and optional due date to every task.               |
+| 🔎 Find your focus   | Search, filter by status/category, and sort by newest, due date, or priority.   |
+| 💾 Local saving      | Tasks are saved in your browser with `localStorage` and return after a refresh. |
+| 📊 Live progress     | See active, completed, and total task counts at a glance.                       |
+| 📱 Responsive design | A polished layout that adapts to desktop and mobile screens.                    |
 
 ## 🧰 Built with
 
@@ -47,38 +48,35 @@ That’s it—there are no dependencies to install.
 
 ## 🎯 How to use it
 
-Once the current page wiring is corrected (see [Current implementation status](#-current-implementation-status)), the intended flow is:
-
 1. Enter a task in the **“Add a new task…”** field.
-2. Click **+ Add**.
-3. Tick a checkbox when you finish a task.
-4. Hover over a task to reveal its edit and delete controls.
-5. Watch the statistics cards update as your list changes.
+2. Choose its category, priority, and optional due date.
+3. Click **Add task** or press <kbd>Enter</kbd>.
+4. Tick a checkbox when you finish a task; use ✎ to edit or × to delete it.
+5. Use the search, filters, and sort menu to focus on what matters now.
 
 ## 📁 Project structure
 
 ```text
 to-do-app/
-├── index.html                       # App markup and current in-page behaviour
-├── style.css                        # Reusable visual styles
-├── script.js                        # Standalone task-adding logic
+├── index.html                       # Accessible app markup and task template
+├── style.css                        # Responsive visual design
+├── script.js                        # Task state, localStorage, filters, and interactions
 ├── circle-check-regular-full.svg    # Checkmark icon asset
 └── README.md                        # Project documentation
 ```
 
-## 🔍 Current implementation status
+## 🔍 Data and browser support
 
-- `index.html` contains the page layout and its current in-page task logic.
-- `style.css` and `script.js` are present as separate files, but are not currently linked from `index.html`.
-- The in-page script refers to `taskList`, while the page markup currently uses `taskLists`; this prevents the startup task list from loading until the IDs match.
-- The intended task data is session-only: no database or browser storage is implemented.
+- Task data stays on your device, in your browser’s `localStorage`; no account or server is required.
+- Clearing browser site data will remove saved tasks.
+- The app uses modern browser features and works best in current Chrome, Edge, Firefox, and Safari releases.
 
 ## 💡 Ideas for the next version
 
-- Save tasks with `localStorage` so they remain after a refresh.
-- Add keyboard support, such as pressing <kbd>Enter</kbd> to add a task.
-- Add due dates, priorities, categories, and search/filter controls.
-- Improve small-screen/mobile interactions.
+- Add recurring tasks and reminders.
+- Add drag-and-drop task ordering.
+- Export and import task lists.
+- Add optional cloud synchronization.
 - Add automated tests and a live deployment.
 
 ## 🤝 Contributing
